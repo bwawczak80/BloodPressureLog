@@ -1,24 +1,286 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="L2f-Tc-SKs">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--History-->
+        <scene sceneID="bsh-RT-zjB">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <viewController id="aED-TC-fOI" customClass="HistoryViewController" customModule="BloodPressureLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QQd-wo-Koi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oVn-7Q-YGf">
+                                <rect key="frame" x="0.0" y="65" width="414" height="622"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="8PX-bu-2Yp">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8PX-bu-2Yp" id="xwc-Yh-T9o">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="oVn-7Q-YGf" firstAttribute="top" secondItem="SSR-uM-piT" secondAttribute="top" constant="45" id="Eka-FI-FDD"/>
+                            <constraint firstItem="oVn-7Q-YGf" firstAttribute="leading" secondItem="SSR-uM-piT" secondAttribute="leading" id="Fhn-uJ-oM0"/>
+                            <constraint firstItem="oVn-7Q-YGf" firstAttribute="trailing" secondItem="SSR-uM-piT" secondAttribute="trailing" id="LsE-0y-aFe"/>
+                            <constraint firstItem="oVn-7Q-YGf" firstAttribute="bottom" secondItem="SSR-uM-piT" secondAttribute="bottom" id="VeY-6v-OLj"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SSR-uM-piT"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="History" id="12F-JG-drQ"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O2t-rg-dSQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="518.84057971014499" y="371.73913043478262"/>
+        </scene>
+        <!--Recs-->
+        <scene sceneID="rCD-C0-Kor">
+            <objects>
+                <viewController id="Qp5-9X-wQE" customClass="RecsViewController" customModule="BloodPressureLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cjJ-LS-TVu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85j-cr-qdv">
+                                <rect key="frame" x="188" y="357.66666666666669" width="38" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="85j-cr-qdv" firstAttribute="centerX" secondItem="cjJ-LS-TVu" secondAttribute="centerX" id="CxV-og-1qs"/>
+                            <constraint firstItem="85j-cr-qdv" firstAttribute="centerY" secondItem="cjJ-LS-TVu" secondAttribute="centerY" id="xVe-DG-Sgm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="08C-yu-6WP"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Recs" id="vdE-0f-NaI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U2q-XB-aPl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1389.8550724637682" y="390.48913043478262"/>
+        </scene>
+        <!--Log BP-->
+        <scene sceneID="vs8-tR-MSl">
+            <objects>
+                <viewController id="Gij-8j-tfY" customClass="LogViewController" customModule="BloodPressureLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t5G-Jh-Nhg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="mmHG" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bTQ-Ad-VPH">
+                                <rect key="frame" x="128" y="156" width="266" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="mmHG" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z24-3V-CNq">
+                                <rect key="frame" x="128" y="226" width="266" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Systolic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0I-iU-OHu">
+                                <rect key="frame" x="19" y="165" width="60" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diastolic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mn8-ax-iFJ">
+                                <rect key="frame" x="19" y="235" width="66" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pulse" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTV-VI-i7h">
+                                <rect key="frame" x="19" y="305" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="BPM" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u2w-fm-Njr">
+                                <rect key="frame" x="128" y="296" width="266" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaa-Ee-0WN">
+                                <rect key="frame" x="182.66666666666666" y="582" width="49" height="30"/>
+                                <state key="normal" title="Log BP"/>
+                                <connections>
+                                    <action selector="logBP:" destination="Gij-8j-tfY" eventType="touchUpInside" id="VOw-cR-Mc0"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Optional" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jMr-WG-sff">
+                                <rect key="frame" x="128" y="366" width="266" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KWV-9C-Bey">
+                                <rect key="frame" x="19" y="375" width="46" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Current time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8d1-f8-nWe">
+                                <rect key="frame" x="20" y="436" width="374" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blood Pressure Log" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fsu-U6-ZLc">
+                                <rect key="frame" x="100" y="49.999999999999993" width="214" height="28.666666666666664"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQK-GM-o28">
+                                <rect key="frame" x="20" y="504" width="374" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="u2w-fm-Njr" firstAttribute="bottom" secondItem="QTV-VI-i7h" secondAttribute="bottom" id="08n-ft-AIs"/>
+                            <constraint firstItem="jMr-WG-sff" firstAttribute="bottom" secondItem="KWV-9C-Bey" secondAttribute="bottom" id="48j-bm-hmu"/>
+                            <constraint firstItem="tja-e2-cVE" firstAttribute="trailing" secondItem="Z24-3V-CNq" secondAttribute="trailing" constant="20" id="4U0-Ai-y4i"/>
+                            <constraint firstItem="8d1-f8-nWe" firstAttribute="leading" secondItem="tja-e2-cVE" secondAttribute="leading" constant="20" id="6sn-Za-XLi"/>
+                            <constraint firstItem="tja-e2-cVE" firstAttribute="trailing" secondItem="bTQ-Ad-VPH" secondAttribute="trailing" constant="20" id="AQf-Ji-Gxm"/>
+                            <constraint firstItem="tja-e2-cVE" firstAttribute="trailing" secondItem="jMr-WG-sff" secondAttribute="trailing" constant="20" id="BkD-6k-Zem"/>
+                            <constraint firstItem="tja-e2-cVE" firstAttribute="bottom" secondItem="qaa-Ee-0WN" secondAttribute="bottom" constant="75" id="CDw-1z-W9M"/>
+                            <constraint firstItem="tja-e2-cVE" firstAttribute="trailing" secondItem="fsu-U6-ZLc" secondAttribute="trailing" constant="100" id="Cp7-P3-aOX"/>
+                            <constraint firstItem="bTQ-Ad-VPH" firstAttribute="bottom" secondItem="G0I-iU-OHu" secondAttribute="bottom" id="DxL-I0-bqd"/>
+                            <constraint firstItem="Z24-3V-CNq" firstAttribute="top" secondItem="bTQ-Ad-VPH" secondAttribute="bottom" constant="40" id="GEt-Oi-TQC"/>
+                            <constraint firstItem="QTV-VI-i7h" firstAttribute="leading" secondItem="tja-e2-cVE" secondAttribute="leading" constant="19" id="Hvq-13-aeT"/>
+                            <constraint firstItem="DQK-GM-o28" firstAttribute="centerX" secondItem="t5G-Jh-Nhg" secondAttribute="centerX" id="JIu-5V-exo"/>
+                            <constraint firstItem="Z24-3V-CNq" firstAttribute="leading" secondItem="bTQ-Ad-VPH" secondAttribute="leading" id="L5j-DM-SUb"/>
+                            <constraint firstItem="bTQ-Ad-VPH" firstAttribute="top" secondItem="fsu-U6-ZLc" secondAttribute="bottom" constant="77.329999999999998" id="MoF-Uu-2W5"/>
+                            <constraint firstItem="QTV-VI-i7h" firstAttribute="leading" secondItem="G0I-iU-OHu" secondAttribute="leading" id="QJ1-gW-qZP"/>
+                            <constraint firstItem="jMr-WG-sff" firstAttribute="top" secondItem="u2w-fm-Njr" secondAttribute="bottom" constant="40" id="RcT-xY-0pn"/>
+                            <constraint firstItem="tja-e2-cVE" firstAttribute="trailing" secondItem="u2w-fm-Njr" secondAttribute="trailing" constant="20" id="RrN-vj-2m5"/>
+                            <constraint firstItem="tja-e2-cVE" firstAttribute="trailing" secondItem="8d1-f8-nWe" secondAttribute="trailing" constant="20" id="WKP-9J-v2P"/>
+                            <constraint firstItem="Z24-3V-CNq" firstAttribute="leading" secondItem="mn8-ax-iFJ" secondAttribute="trailing" constant="43" id="ZP9-NV-05J"/>
+                            <constraint firstItem="qaa-Ee-0WN" firstAttribute="centerX" secondItem="t5G-Jh-Nhg" secondAttribute="centerX" id="ZYD-n9-ygc"/>
+                            <constraint firstItem="u2w-fm-Njr" firstAttribute="top" secondItem="Z24-3V-CNq" secondAttribute="bottom" constant="40" id="d3v-ET-LQ1"/>
+                            <constraint firstItem="Z24-3V-CNq" firstAttribute="bottom" secondItem="mn8-ax-iFJ" secondAttribute="bottom" id="dIR-I1-qPY"/>
+                            <constraint firstItem="8d1-f8-nWe" firstAttribute="top" secondItem="jMr-WG-sff" secondAttribute="bottom" constant="40" id="ezC-AA-VRE"/>
+                            <constraint firstItem="DQK-GM-o28" firstAttribute="top" secondItem="8d1-f8-nWe" secondAttribute="bottom" constant="41" id="g0S-BW-G4i"/>
+                            <constraint firstItem="fsu-U6-ZLc" firstAttribute="top" secondItem="tja-e2-cVE" secondAttribute="top" constant="30" id="g8M-f2-7Yc"/>
+                            <constraint firstItem="mn8-ax-iFJ" firstAttribute="leading" secondItem="G0I-iU-OHu" secondAttribute="leading" id="k4u-ba-5LO"/>
+                            <constraint firstItem="jMr-WG-sff" firstAttribute="leading" secondItem="u2w-fm-Njr" secondAttribute="leading" id="ke5-Kz-5gb"/>
+                            <constraint firstItem="fsu-U6-ZLc" firstAttribute="centerX" secondItem="t5G-Jh-Nhg" secondAttribute="centerX" id="mlW-OI-go4"/>
+                            <constraint firstItem="fsu-U6-ZLc" firstAttribute="leading" secondItem="tja-e2-cVE" secondAttribute="leading" constant="100" id="u4k-Fs-R2q"/>
+                            <constraint firstItem="u2w-fm-Njr" firstAttribute="leading" secondItem="bTQ-Ad-VPH" secondAttribute="leading" id="y99-ed-YSh"/>
+                            <constraint firstItem="KWV-9C-Bey" firstAttribute="leading" secondItem="QTV-VI-i7h" secondAttribute="leading" id="yfL-IV-Qpf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tja-e2-cVE"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Log BP" id="HJP-9y-hSm"/>
+                    <connections>
+                        <outlet property="diastolic" destination="Z24-3V-CNq" id="cYc-8j-8Br"/>
+                        <outlet property="display" destination="DQK-GM-o28" id="OYJ-xv-JDa"/>
+                        <outlet property="notes" destination="jMr-WG-sff" id="rHS-2O-n3V"/>
+                        <outlet property="pulse" destination="u2w-fm-Njr" id="aFk-Eb-Axa"/>
+                        <outlet property="systolic" destination="bTQ-Ad-VPH" id="cvd-Ec-5vM"/>
+                        <outlet property="timeStamp" destination="8d1-f8-nWe" id="Sh2-FO-TDz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Gz-SQ-NS8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="395.6521739130435" y="-595.10869565217399"/>
+        </scene>
+        <!--Stats-->
+        <scene sceneID="s8V-Kb-dei">
+            <objects>
+                <viewController id="LHi-Fo-ul4" customClass="StatsViewController" customModule="BloodPressureLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GTT-VC-54i">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Screen Shot 2019-04-04 at 7.17.22 PM" translatesAutoresizingMaskIntoConstraints="NO" id="q4N-4I-gce">
+                                <rect key="frame" x="0.0" y="37" width="414" height="650"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="HaR-uD-JzP"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Stats" id="QwI-Yd-oPQ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h66-dO-cKx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1369.5652173913045" y="-287.77173913043481"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="QkW-UJ-83z">
+            <objects>
+                <viewController id="Msi-OM-fZI" customClass="SettingsViewController" customModule="BloodPressureLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rg3-Ie-Ylb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eT5-nE-0JU">
+                                <rect key="frame" x="176" y="357.66666666666669" width="62" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eT5-nE-0JU" firstAttribute="centerY" secondItem="Rg3-Ie-Ylb" secondAttribute="centerY" id="AgT-Gy-qhT"/>
+                            <constraint firstItem="eT5-nE-0JU" firstAttribute="centerX" secondItem="Rg3-Ie-Ylb" secondAttribute="centerX" id="hNo-ff-kUi"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Emm-dD-sk6"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Settings" id="aaJ-sk-sxM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="32Y-1g-VOY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2147" y="-279"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="CBN-9E-hLt">
+            <objects>
+                <tabBarController id="L2f-Tc-SKs" customClass="ViewController" customModule="BloodPressureLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="T8g-ge-duc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Gij-8j-tfY" kind="relationship" relationship="viewControllers" id="Kaa-Ee-qPI"/>
+                        <segue destination="aED-TC-fOI" kind="relationship" relationship="viewControllers" id="vw6-pS-XwE"/>
+                        <segue destination="LHi-Fo-ul4" kind="relationship" relationship="viewControllers" id="Gnf-Nu-cvf"/>
+                        <segue destination="Qp5-9X-wQE" kind="relationship" relationship="viewControllers" id="rAJ-GD-vtr"/>
+                        <segue destination="Msi-OM-fZI" kind="relationship" relationship="viewControllers" id="UAy-uO-Vv1"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SJn-fv-ZAS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-575" y="50"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Screen Shot 2019-04-04 at 7.17.22 PM" width="738" height="776"/>
+    </resources>
 </document>

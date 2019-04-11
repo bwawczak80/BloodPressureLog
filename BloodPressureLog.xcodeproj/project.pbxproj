@@ -13,6 +13,11 @@
 		6B331E1B2256C0330050A02C /* BloodPressureLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B331E192256C0330050A02C /* BloodPressureLog.xcdatamodeld */; };
 		6B331E1D2256C0340050A02C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B331E1C2256C0340050A02C /* Assets.xcassets */; };
 		6B331E202256C0340050A02C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B331E1E2256C0340050A02C /* LaunchScreen.storyboard */; };
+		6B331E282256C0EA0050A02C /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B331E272256C0EA0050A02C /* LogViewController.swift */; };
+		6B331E2A2256C10C0050A02C /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B331E292256C10C0050A02C /* HistoryViewController.swift */; };
+		6B331E2C2256C1270050A02C /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B331E2B2256C1270050A02C /* StatsViewController.swift */; };
+		6B331E2E2256C1490050A02C /* RecsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B331E2D2256C1490050A02C /* RecsViewController.swift */; };
+		6B331E302256C15F0050A02C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B331E2F2256C15F0050A02C /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		6B331E1C2256C0340050A02C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B331E1F2256C0340050A02C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6B331E212256C0340050A02C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6B331E272256C0EA0050A02C /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		6B331E292256C10C0050A02C /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		6B331E2B2256C1270050A02C /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
+		6B331E2D2256C1490050A02C /* RecsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecsViewController.swift; sourceTree = "<group>"; };
+		6B331E2F2256C15F0050A02C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +73,11 @@
 				6B331E1E2256C0340050A02C /* LaunchScreen.storyboard */,
 				6B331E212256C0340050A02C /* Info.plist */,
 				6B331E192256C0330050A02C /* BloodPressureLog.xcdatamodeld */,
+				6B331E272256C0EA0050A02C /* LogViewController.swift */,
+				6B331E292256C10C0050A02C /* HistoryViewController.swift */,
+				6B331E2B2256C1270050A02C /* StatsViewController.swift */,
+				6B331E2D2256C1490050A02C /* RecsViewController.swift */,
+				6B331E2F2256C15F0050A02C /* SettingsViewController.swift */,
 			);
 			path = BloodPressureLog;
 			sourceTree = "<group>";
@@ -141,6 +156,11 @@
 				6B331E152256C0330050A02C /* ViewController.swift in Sources */,
 				6B331E132256C0330050A02C /* AppDelegate.swift in Sources */,
 				6B331E1B2256C0330050A02C /* BloodPressureLog.xcdatamodeld in Sources */,
+				6B331E2E2256C1490050A02C /* RecsViewController.swift in Sources */,
+				6B331E2A2256C10C0050A02C /* HistoryViewController.swift in Sources */,
+				6B331E2C2256C1270050A02C /* StatsViewController.swift in Sources */,
+				6B331E282256C0EA0050A02C /* LogViewController.swift in Sources */,
+				6B331E302256C15F0050A02C /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
