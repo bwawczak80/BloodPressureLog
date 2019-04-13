@@ -25,6 +25,49 @@ class LogViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+//        let fileManager = FileManager.default
+//
+//        // create reference to SQLite database
+//        var sqliteDB: OpaquePointer? = nil
+//        var dbUrl: NSURL? = nil
+//
+//        //initiate database URL
+//        do {
+//            let baseURL = try
+//                fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+//            let dbUrl = baseURL.appendingPathComponent("swift.sqlite")
+//        } catch {
+//            print(error)
+//        }
+//
+//        if let dbUrl = dbUrl {
+//
+//            let flags = SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE
+//            let status = sqlite3_open_v2(dbUrl.absoluteString?.cString(using: String.Encoding.utf8)!, &sqliteDB, flags, nil)
+//
+//            if status == SQLITE_OK {
+//                let errMsg: UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>? = nil
+//
+//                let sqlStatement = "create table if not exists BPLogs (ID Integer Primary key AutoIncrement, Systolic Int, Diastolic Int, Pulse Int, Notes Text);"
+//                if sqlite3_exec(sqliteDB, sqlStatement, nil, nil, errMsg) == SQLITE_OK {
+//                    print("created table")
+//                }else {
+//                    print("failed to create table")
+//                }
+//
+//                // create insert statement
+//
+//                //TODO https://www.youtube.com/watch?v=8wc723Wt8wQ  at 7:53
+//
+//                var statement: COpaquePointer = nil
+//                let insert
+//            }
+//
+//
+//        }
+        
         display.isHidden = true
         timeStamp.text = getTimeStamp()
         

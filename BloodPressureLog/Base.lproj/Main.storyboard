@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="L2f-Tc-SKs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KoW-Eq-RoE">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -42,13 +42,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SSR-uM-piT"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="History" id="12F-JG-drQ"/>
+                    <tabBarItem key="tabBarItem" title="History" image="today_apps" id="12F-JG-drQ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O2t-rg-dSQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="518.84057971014499" y="371.73913043478262"/>
         </scene>
-        <!--Recs-->
+        <!--Guidelines-->
         <scene sceneID="rCD-C0-Kor">
             <objects>
                 <viewController id="Qp5-9X-wQE" customClass="RecsViewController" customModule="BloodPressureLog" customModuleProvider="target" sceneMemberID="viewController">
@@ -56,27 +56,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85j-cr-qdv">
-                                <rect key="frame" x="188" y="357.66666666666669" width="38" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85j-cr-qdv">
+                                <rect key="frame" x="20" y="334" width="374" height="142.33333333333337"/>
+                                <string key="text">These guidelines are based on recommendations from the American Stroke Association.  The American Stroke Association is a national voluntary health agency to help reduce disability and death from cardiovascular diseases and stroke.  Click Below for more information.  </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chart" translatesAutoresizingMaskIntoConstraints="NO" id="KLx-6t-YIH">
+                                <rect key="frame" x="20" y="99" width="374" height="215"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guidelines" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y1u-fi-mYW">
+                                <rect key="frame" x="152" y="50" width="110" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Kh-tR-mzD">
+                                <rect key="frame" x="20" y="486.33333333333331" width="374" height="29.999999999999943"/>
+                                <state key="normal" title="Info"/>
+                                <connections>
+                                    <action selector="onClick:" destination="Qp5-9X-wQE" eventType="touchUpInside" id="12L-EQ-Lyj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="85j-cr-qdv" firstAttribute="centerX" secondItem="cjJ-LS-TVu" secondAttribute="centerX" id="CxV-og-1qs"/>
-                            <constraint firstItem="85j-cr-qdv" firstAttribute="centerY" secondItem="cjJ-LS-TVu" secondAttribute="centerY" id="xVe-DG-Sgm"/>
+                            <constraint firstItem="08C-yu-6WP" firstAttribute="trailing" secondItem="KLx-6t-YIH" secondAttribute="trailing" constant="20" id="0mD-cg-uwu"/>
+                            <constraint firstItem="y1u-fi-mYW" firstAttribute="leading" secondItem="08C-yu-6WP" secondAttribute="leading" constant="152" id="7J4-YB-naq"/>
+                            <constraint firstItem="0Kh-tR-mzD" firstAttribute="leading" secondItem="08C-yu-6WP" secondAttribute="leading" constant="20" id="7xO-g2-mGT"/>
+                            <constraint firstItem="KLx-6t-YIH" firstAttribute="leading" secondItem="08C-yu-6WP" secondAttribute="leading" constant="20" id="HnC-Wd-W36"/>
+                            <constraint firstItem="08C-yu-6WP" firstAttribute="trailing" secondItem="y1u-fi-mYW" secondAttribute="trailing" constant="152" id="KUe-j0-Cg7"/>
+                            <constraint firstItem="08C-yu-6WP" firstAttribute="trailing" secondItem="85j-cr-qdv" secondAttribute="trailing" constant="20" id="NIA-Ih-GsO"/>
+                            <constraint firstItem="KLx-6t-YIH" firstAttribute="top" secondItem="y1u-fi-mYW" secondAttribute="bottom" constant="20" id="Ns4-vH-qJ5"/>
+                            <constraint firstItem="08C-yu-6WP" firstAttribute="trailing" secondItem="0Kh-tR-mzD" secondAttribute="trailing" constant="20" id="YiD-H0-D5X"/>
+                            <constraint firstItem="85j-cr-qdv" firstAttribute="leading" secondItem="08C-yu-6WP" secondAttribute="leading" constant="20" id="boj-6z-FWx"/>
+                            <constraint firstItem="85j-cr-qdv" firstAttribute="top" secondItem="KLx-6t-YIH" secondAttribute="bottom" constant="20" id="h2h-jo-99R"/>
+                            <constraint firstItem="0Kh-tR-mzD" firstAttribute="top" secondItem="85j-cr-qdv" secondAttribute="bottom" constant="10" id="qrv-bi-ojp"/>
+                            <constraint firstItem="y1u-fi-mYW" firstAttribute="top" secondItem="08C-yu-6WP" secondAttribute="top" constant="30" id="tXe-QK-sfh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="08C-yu-6WP"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Recs" id="vdE-0f-NaI"/>
+                    <tabBarItem key="tabBarItem" title="Guidelines" image="health_sources" id="vdE-0f-NaI"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U2q-XB-aPl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1389.8550724637682" y="390.48913043478262"/>
         </scene>
-        <!--Log BP-->
+        <!--Log-->
         <scene sceneID="vs8-tR-MSl">
             <objects>
                 <viewController id="Gij-8j-tfY" customClass="LogViewController" customModule="BloodPressureLog" customModuleProvider="target" sceneMemberID="viewController">
@@ -194,7 +221,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tja-e2-cVE"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Log BP" id="HJP-9y-hSm"/>
+                    <tabBarItem key="tabBarItem" title="Log" image="plus" id="HJP-9y-hSm"/>
                     <connections>
                         <outlet property="diastolic" destination="Z24-3V-CNq" id="cYc-8j-8Br"/>
                         <outlet property="display" destination="DQK-GM-o28" id="OYJ-xv-JDa"/>
@@ -224,7 +251,7 @@
                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="HaR-uD-JzP"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Stats" id="QwI-Yd-oPQ"/>
+                    <tabBarItem key="tabBarItem" title="Stats" image="statistics" id="QwI-Yd-oPQ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h66-dO-cKx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -252,11 +279,65 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Emm-dD-sk6"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" id="aaJ-sk-sxM"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="aaJ-sk-sxM"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="32Y-1g-VOY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2147" y="-279"/>
+        </scene>
+        <!--Legal View Controller-->
+        <scene sceneID="Zyj-F8-cVF">
+            <objects>
+                <viewController id="KoW-Eq-RoE" customClass="LegalViewController" customModule="BloodPressureLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HV5-vc-Hbo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mEY-m3-Ozc">
+                                <rect key="frame" x="0.0" y="20" width="414" height="1161"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ai2-QQ-9ab">
+                                        <rect key="frame" x="8" y="7.9999999999999858" width="3661.3333333333335" height="243.66666666666663"/>
+                                        <mutableString key="text">The information contained on Blood Pressure Log mobile app (the "Service") is for general information purposes only.
+
+assumes no responsibility for errors or omissions in the contents on the Service.
+
+In no event shall be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. reserves the right to make additions, deletions, or modification to the contents on the Service at any time without prior notice. This Disclaimer has been created with the help of TermsFeed Disclaimer Generator.
+
+does not warrant that the website is free of viruses or other harmful components.
+External links disclaimer
+
+Blood Pressure Log mobile app may contain links to external websites that are not provided or maintained by or in any way affiliated with
+
+Please note that the does not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites.</mutableString>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ai2-QQ-9ab" firstAttribute="top" secondItem="mEY-m3-Ozc" secondAttribute="top" constant="8" id="TEA-yT-gdE"/>
+                                    <constraint firstItem="ai2-QQ-9ab" firstAttribute="leading" secondItem="mEY-m3-Ozc" secondAttribute="leading" constant="8" id="Uax-SZ-tNx"/>
+                                    <constraint firstAttribute="trailing" secondItem="ai2-QQ-9ab" secondAttribute="trailing" constant="8" id="cxd-Ff-0sv"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mEY-m3-Ozc" firstAttribute="bottom" secondItem="8M2-0O-VIY" secondAttribute="bottom" id="2jm-QN-qoP"/>
+                            <constraint firstItem="mEY-m3-Ozc" firstAttribute="leading" secondItem="8M2-0O-VIY" secondAttribute="leading" id="AkX-Yb-18g"/>
+                            <constraint firstItem="mEY-m3-Ozc" firstAttribute="top" secondItem="8M2-0O-VIY" secondAttribute="top" id="Djs-eg-pde"/>
+                            <constraint firstItem="mEY-m3-Ozc" firstAttribute="trailing" secondItem="8M2-0O-VIY" secondAttribute="trailing" id="hjz-uO-uJ9"/>
+                            <constraint firstItem="mEY-m3-Ozc" firstAttribute="top" secondItem="8M2-0O-VIY" secondAttribute="top" id="jab-wG-SNi"/>
+                            <constraint firstItem="mEY-m3-Ozc" firstAttribute="leading" secondItem="8M2-0O-VIY" secondAttribute="leading" id="kBm-j0-aeV"/>
+                            <constraint firstItem="8M2-0O-VIY" firstAttribute="trailing" secondItem="mEY-m3-Ozc" secondAttribute="trailing" id="lqr-Yz-mrv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8M2-0O-VIY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m2h-KV-dSp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1386.9565217391305" y="49.728260869565219"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="CBN-9E-hLt">
@@ -282,5 +363,11 @@
     </scenes>
     <resources>
         <image name="Screen Shot 2019-04-04 at 7.17.22 PM" width="738" height="776"/>
+        <image name="chart" width="251" height="215"/>
+        <image name="health_sources" width="30" height="30"/>
+        <image name="plus" width="30" height="30"/>
+        <image name="settings" width="30" height="30"/>
+        <image name="statistics" width="30" height="30"/>
+        <image name="today_apps" width="30" height="30"/>
     </resources>
 </document>

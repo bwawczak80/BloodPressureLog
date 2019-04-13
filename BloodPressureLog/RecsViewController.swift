@@ -16,6 +16,12 @@ class RecsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+
+    @IBAction func onClick(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://www.heart.org/en/health-topics/high-blood-pressure/high-blood-pressure-toolkit-resources")! as URL, options: [:], completionHandler: nil)
+    }
+    
 
     /*
     // MARK: - Navigation
