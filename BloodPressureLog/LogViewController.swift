@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Foundation
 
+
 class LogViewController: UIViewController {
 
     
@@ -20,56 +21,102 @@ class LogViewController: UIViewController {
     @IBOutlet weak var timeStamp: UILabel!
     @IBOutlet weak var display: UILabel!
     
+    
+    @IBOutlet var lineFields:[UITextField]!
+    
     var logArray:[Any] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
+        // get path to database file
         
-//        let fileManager = FileManager.default
-//
-//        // create reference to SQLite database
-//        var sqliteDB: OpaquePointer? = nil
-//        var dbUrl: NSURL? = nil
-//
-//        //initiate database URL
-//        do {
-//            let baseURL = try
-//                fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-//            let dbUrl = baseURL.appendingPathComponent("swift.sqlite")
-//        } catch {
-//            print(error)
-//        }
-//
-//        if let dbUrl = dbUrl {
-//
-//            let flags = SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE
-//            let status = sqlite3_open_v2(dbUrl.absoluteString?.cString(using: String.Encoding.utf8)!, &sqliteDB, flags, nil)
-//
-//            if status == SQLITE_OK {
-//                let errMsg: UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>? = nil
-//
-//                let sqlStatement = "create table if not exists BPLogs (ID Integer Primary key AutoIncrement, Systolic Int, Diastolic Int, Pulse Int, Notes Text);"
-//                if sqlite3_exec(sqliteDB, sqlStatement, nil, nil, errMsg) == SQLITE_OK {
-//                    print("created table")
-//                }else {
-//                    print("failed to create table")
-//                }
-//
-//                // create insert statement
-//
-//                //TODO https://www.youtube.com/watch?v=8wc723Wt8wQ  at 7:53
-//
-//                var statement: COpaquePointer = nil
-//                let insert
-//            }
-//
-//
-//        }
+        var database: OpaquePointer? = nil
+        var result = sqlite3_open(dataFilePath(), &database)
+        if result != SQLITE_OK {
+            sqlite3_close(database)
+            print("Failed to open database")
+            return
+        }
+        // create sql table to hold data if none exists
+        let createSQL = "CREATE TABLE IF NOT EXISTS FIELDS " + "(ROW INTEGER PRIMARY KEY, FIELD_DATA TEXT);"
+        
+        var errMsg:UnsafeMutablePointer<Int8>? = nil
+        result = sqlite3_exec(database, createSQL, nil, nil, &errMsg)
+        if (result != SQLITE_OK) {
+            sqlite3_close(database)
+            print("Failed to create table")
+            return
+        }
+        
+        // select data
+        let query = "SELECT ROW, FIELD_DATA FROM FIELDS ORDER BY ROW"
+        var statement:OpaquePointer? = nil
+        if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
+            while sqlite3_step(statement) == SQLITE_ROW {
+                let row = Int(sqlite3_column_int(statement, 0))
+                let rowData = sqlite3_column_text(statement, 1)
+                let fieldValue = String(cString: rowData!)
+                lineFields[row].text = fieldValue
+            }
+            
+            // close database connection
+            sqlite3_finalize(statement)
+        }
+        sqlite3_close(database)
+        
+        let app = UIApplication.shared
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillResignActive(notification:)), name: UIApplication.willResignActiveNotification, object: app)
+        
+        
+
         
         display.isHidden = true
         timeStamp.text = getTimeStamp()
+        
+    }
+    
+    func dataFilePath() -> String {
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        var url: String?
+        url = ""  //create a blank path
+        url = urls.first?.appendingPathComponent("data.plist").path
+        return url!
+    }
+    
+    @objc func applicationWillResignActive(notification:NSNotification) {
+        var database:OpaquePointer? = nil
+        let result = sqlite3_open(dataFilePath(), &database)
+        if result != SQLITE_OK {
+            sqlite3_close(database)
+            print("Failed to open database")
+            return
+        }
+        
+        // loops through the four fields and update each row of the database
+        for i in 0..<lineFields.count {
+            let field = lineFields[i]
+            
+            
+            let update = "INSERT OR REPLACE INTO FIELDS (ROW, FIELD_DATA) " + "VALUES (?, ?);"
+            var statement:OpaquePointer? = nil
+            if sqlite3_prepare_v2(database, update, -1, &statement, nil) == SQLITE_OK {
+                let text = field.text
+                sqlite3_bind_int(statement, 1, Int32(i))
+                
+                sqlite3_bind_text(statement, 2, text!, -1, nil)
+            }
+            
+            // execute the data update and finalize the statement
+            if sqlite3_step(statement) != SQLITE_DONE {
+                print ("Error updating table")
+                sqlite3_close(database)
+                return
+            }
+            sqlite3_finalize(statement)
+        }
+        sqlite3_close(database)
         
     }
     
