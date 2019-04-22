@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 class StatsViewController: UIViewController {
 

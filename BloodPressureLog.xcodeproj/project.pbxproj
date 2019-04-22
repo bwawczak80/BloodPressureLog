@@ -21,6 +21,8 @@
 		6B331E302256C15F0050A02C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B331E2F2256C15F0050A02C /* SettingsViewController.swift */; };
 		6B43DEEA226C12640068819A /* UserLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B43DEE9226C12630068819A /* UserLog.swift */; };
 		6B43DEF0226C13500068819A /* BpLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B43DEEF226C13500068819A /* BpLogCell.swift */; };
+		6B43DEF4226DAB470068819A /* WebViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B43DEF3226DAB470068819A /* WebViewControl.swift */; };
+		6B43DEF6226DAE060068819A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B43DEF5226DAE060068819A /* WebKit.framework */; };
 		6B8B249622605E3B0052339F /* LegalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B249522605E3B0052339F /* LegalViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,8 @@
 		6B331E2F2256C15F0050A02C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6B43DEE9226C12630068819A /* UserLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLog.swift; sourceTree = "<group>"; };
 		6B43DEEF226C13500068819A /* BpLogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BpLogCell.swift; sourceTree = "<group>"; };
+		6B43DEF3226DAB470068819A /* WebViewControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControl.swift; sourceTree = "<group>"; };
+		6B43DEF5226DAE060068819A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		6B8B249522605E3B0052339F /* LegalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -50,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B43DEF6226DAE060068819A /* WebKit.framework in Frameworks */,
 				6B257803225EE623009B903F /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -60,6 +65,7 @@
 		6B257801225EE623009B903F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6B43DEF5226DAE060068819A /* WebKit.framework */,
 				6B257802225EE623009B903F /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
@@ -101,6 +107,7 @@
 				6B331E2F2256C15F0050A02C /* SettingsViewController.swift */,
 				6B257804225EE66A009B903F /* BloodPressureLog-Bridging-Header.h */,
 				6B43DEEF226C13500068819A /* BpLogCell.swift */,
+				6B43DEF3226DAB470068819A /* WebViewControl.swift */,
 			);
 			path = BloodPressureLog;
 			sourceTree = "<group>";
@@ -180,6 +187,7 @@
 				6B331E152256C0330050A02C /* ViewController.swift in Sources */,
 				6B8B249622605E3B0052339F /* LegalViewController.swift in Sources */,
 				6B331E132256C0330050A02C /* AppDelegate.swift in Sources */,
+				6B43DEF4226DAB470068819A /* WebViewControl.swift in Sources */,
 				6B43DEEA226C12640068819A /* UserLog.swift in Sources */,
 				6B331E1B2256C0330050A02C /* BloodPressureLog.xcdatamodeld in Sources */,
 				6B331E2E2256C1490050A02C /* RecsViewController.swift in Sources */,

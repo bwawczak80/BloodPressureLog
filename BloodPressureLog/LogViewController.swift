@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Foundation
+import WebKit
 
 
 class LogViewController: UIViewController {
@@ -26,12 +27,14 @@ class LogViewController: UIViewController {
     
     var logArray:[Any] = []
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+      
+        
         
         // get path to database file
-        
         var database: OpaquePointer? = nil
         var result = sqlite3_open(dataFilePath(), &database)
         if result != SQLITE_OK {
@@ -39,9 +42,9 @@ class LogViewController: UIViewController {
             print("Failed to open database")
             return
         }
+        
         // create sql table to hold data if none exists
         let createSQL = "CREATE TABLE IF NOT EXISTS FIELDS " + "(ROW INTEGER PRIMARY KEY, FIELD_DATA TEXT);"
-        
         var errMsg:UnsafeMutablePointer<Int8>? = nil
         result = sqlite3_exec(database, createSQL, nil, nil, &errMsg)
         if (result != SQLITE_OK) {
@@ -69,8 +72,6 @@ class LogViewController: UIViewController {
         let app = UIApplication.shared
         NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillResignActive(notification:)), name: UIApplication.willResignActiveNotification, object: app)
         
-        
-
         
         display.isHidden = true
         timeStamp.text = getTimeStamp()
@@ -121,16 +122,17 @@ class LogViewController: UIViewController {
     }
     
     @IBAction func logBP(_ sender: Any) {
-        
+        let time = getTimeStamp()
         if validateData(systolic.text ?? "", diastolic.text ?? "", pulse.text ?? "") {
         let systolicInput = Int(systolic.text!)
         let diastolicInput = Int(diastolic.text!)
         let pulseInput = Int(pulse.text!)
         let notesInput = notes.text ?? "None"
         let warningLabel = calculateBpWarning(systolicInput!, diastolicInput!)
+        
         display.isHidden = false
         display.text = "Blood Pressure: \(systolicInput!) / \(diastolicInput!)\nPulse: \(pulseInput!)\n Notes: \(notesInput)"
-        timeStamp.text = getTimeStamp()
+        timeStamp.text = time
             switch(warningLabel){
             case 1:
                 display.text = "Your Blood Pressure is normal"
@@ -232,20 +234,10 @@ class LogViewController: UIViewController {
         formatter.dateFormat = "h:mm:ss a"
         let timeNow = formatter.string(from: currentDate)
         let dateTimeStamp = "\(thisMonth)/\(day ?? 0)/\(year ?? 0) \(timeNow)"
-        
         return dateTimeStamp
-        
             }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    
 
 }

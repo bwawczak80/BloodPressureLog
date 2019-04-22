@@ -18,6 +18,7 @@ class UserLog {
     var diastolic: String
     var notes: String
     
+    
     init(date: String, pulse: String, systolic: String, diastolic: String, notes: String) {
         self.date = date
         self.pulse = pulse

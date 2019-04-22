@@ -159,10 +159,10 @@
             </objects>
             <point key="canvasLocation" x="518.84057971014499" y="371.73913043478262"/>
         </scene>
-        <!--Guidelines-->
+        <!--guidelinesView-->
         <scene sceneID="rCD-C0-Kor">
             <objects>
-                <viewController id="Qp5-9X-wQE" customClass="RecsViewController" customModule="BloodPressureLog" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="guidelinesView" id="Qp5-9X-wQE" customClass="RecsViewController" customModule="BloodPressureLog" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cjJ-LS-TVu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -183,7 +183,7 @@
                                 <rect key="frame" x="20" y="614" width="374" height="30"/>
                                 <state key="normal" title="Info"/>
                                 <connections>
-                                    <action selector="onClick:" destination="Qp5-9X-wQE" eventType="touchUpInside" id="12L-EQ-Lyj"/>
+                                    <segue destination="VYD-SA-NkP" kind="presentation" id="Syb-UX-thY"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85j-cr-qdv">
@@ -216,6 +216,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U2q-XB-aPl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1389.8550724637682" y="390.48913043478262"/>
+        </scene>
+        <!--Web View Control-->
+        <scene sceneID="68j-dK-r5L">
+            <objects>
+                <viewController id="VYD-SA-NkP" customClass="WebViewControl" customModule="BloodPressureLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="y9T-WD-o4H">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blc-lZ-DpM">
+                                <rect key="frame" x="0.0" y="68" width="414" height="668"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SBd-xW-6Hy">
+                                <rect key="frame" x="20" y="30" width="34" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <segue destination="Ao5-bi-fNi" kind="unwind" unwindAction="backFromModal:" id="OSQ-LI-OUj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gAf-bu-noC" firstAttribute="trailing" secondItem="SBd-xW-6Hy" secondAttribute="trailing" constant="360" id="81R-HW-i4a"/>
+                            <constraint firstItem="SBd-xW-6Hy" firstAttribute="top" secondItem="gAf-bu-noC" secondAttribute="top" constant="10" id="U5G-Jz-8a3"/>
+                            <constraint firstItem="blc-lZ-DpM" firstAttribute="top" secondItem="SBd-xW-6Hy" secondAttribute="bottom" constant="8" id="W5R-xO-miA"/>
+                            <constraint firstItem="blc-lZ-DpM" firstAttribute="bottom" secondItem="gAf-bu-noC" secondAttribute="bottom" id="YkJ-Jj-2nc"/>
+                            <constraint firstItem="SBd-xW-6Hy" firstAttribute="leading" secondItem="gAf-bu-noC" secondAttribute="leading" constant="20" id="aMe-72-c5v"/>
+                            <constraint firstItem="blc-lZ-DpM" firstAttribute="trailing" secondItem="gAf-bu-noC" secondAttribute="trailing" id="kBf-eM-eEG"/>
+                            <constraint firstItem="blc-lZ-DpM" firstAttribute="leading" secondItem="gAf-bu-noC" secondAttribute="leading" id="uSj-H2-5nS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gAf-bu-noC"/>
+                    </view>
+                    <connections>
+                        <outlet property="webViewControl" destination="blc-lZ-DpM" id="yzM-33-kHP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bUN-ai-JGs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Ao5-bi-fNi" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2178.2608695652175" y="395.38043478260875"/>
         </scene>
         <!--Log-->
         <scene sceneID="vs8-tR-MSl">
