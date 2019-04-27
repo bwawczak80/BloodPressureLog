@@ -10,11 +10,10 @@ import UIKit
 import CoreData
 import Foundation
 import WebKit
-
+import SQLite3
 
 class LogViewController: UIViewController {
 
-    
     @IBOutlet weak var systolic: UITextField!
     @IBOutlet weak var diastolic: UITextField!
     @IBOutlet weak var pulse: UITextField!
@@ -27,54 +26,28 @@ class LogViewController: UIViewController {
     
     var logArray:[Any] = []
     
+    let createTableString = """
+
+CREATE TABLE IF NOT EXISTS LogTable(
+Id INTEGER PRIMARY KEY AUTOINCREMENT,
+Time TEXT,
+Systolic INTEGER,
+Diastolic INTEGER,
+BPM INTEGER,
+Notes TEXT);
+"""
+    
+let insertStatementString = "INSERT INTO LogTable (Time, Systolic, Diastolic, BPM, Notes) VALUES (?, ?, ?, ?, ?);"
+
+lazy var db = openDatabase()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      
-        
-        
-        // get path to database file
-        var database: OpaquePointer? = nil
-        var result = sqlite3_open(dataFilePath(), &database)
-        if result != SQLITE_OK {
-            sqlite3_close(database)
-            print("Failed to open database")
-            return
-        }
-        
-        // create sql table to hold data if none exists
-        let createSQL = "CREATE TABLE IF NOT EXISTS FIELDS " + "(ROW INTEGER PRIMARY KEY, FIELD_DATA TEXT);"
-        var errMsg:UnsafeMutablePointer<Int8>? = nil
-        result = sqlite3_exec(database, createSQL, nil, nil, &errMsg)
-        if (result != SQLITE_OK) {
-            sqlite3_close(database)
-            print("Failed to create table")
-            return
-        }
-        
-        // select data
-        let query = "SELECT ROW, FIELD_DATA FROM FIELDS ORDER BY ROW"
-        var statement:OpaquePointer? = nil
-        if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
-            while sqlite3_step(statement) == SQLITE_ROW {
-                let row = Int(sqlite3_column_int(statement, 0))
-                let rowData = sqlite3_column_text(statement, 1)
-                let fieldValue = String(cString: rowData!)
-                lineFields[row].text = fieldValue
-            }
-            
-            // close database connection
-            sqlite3_finalize(statement)
-        }
-        sqlite3_close(database)
-        
-        let app = UIApplication.shared
-        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillResignActive(notification:)), name: UIApplication.willResignActiveNotification, object: app)
-        
-        
         display.isHidden = true
         timeStamp.text = getTimeStamp()
+        
+        createTable()
         
     }
     
@@ -86,41 +59,7 @@ class LogViewController: UIViewController {
         return url!
     }
     
-    @objc func applicationWillResignActive(notification:NSNotification) {
-        var database:OpaquePointer? = nil
-        let result = sqlite3_open(dataFilePath(), &database)
-        if result != SQLITE_OK {
-            sqlite3_close(database)
-            print("Failed to open database")
-            return
-        }
-        
-        // loops through the four fields and update each row of the database
-        for i in 0..<lineFields.count {
-            let field = lineFields[i]
-            
-            
-            let update = "INSERT OR REPLACE INTO FIELDS (ROW, FIELD_DATA) " + "VALUES (?, ?);"
-            var statement:OpaquePointer? = nil
-            if sqlite3_prepare_v2(database, update, -1, &statement, nil) == SQLITE_OK {
-                let text = field.text
-                sqlite3_bind_int(statement, 1, Int32(i))
-                
-                sqlite3_bind_text(statement, 2, text!, -1, nil)
-            }
-            
-            // execute the data update and finalize the statement
-            if sqlite3_step(statement) != SQLITE_DONE {
-                print ("Error updating table")
-                sqlite3_close(database)
-                return
-            }
-            sqlite3_finalize(statement)
-        }
-        sqlite3_close(database)
-        
-    }
-    
+
     @IBAction func logBP(_ sender: Any) {
         let time = getTimeStamp()
         if validateData(systolic.text ?? "", diastolic.text ?? "", pulse.text ?? "") {
@@ -129,7 +68,10 @@ class LogViewController: UIViewController {
         let pulseInput = Int(pulse.text!)
         let notesInput = notes.text ?? "None"
         let warningLabel = calculateBpWarning(systolicInput!, diastolicInput!)
-        
+            
+        insert()
+            
+            
         display.isHidden = false
         display.text = "Blood Pressure: \(systolicInput!) / \(diastolicInput!)\nPulse: \(pulseInput!)\n Notes: \(notesInput)"
         timeStamp.text = time
@@ -179,6 +121,7 @@ class LogViewController: UIViewController {
         }
         guard pulse.isEmpty == false, (pulse.count) >= 2, (pulse.count) <= 3 else {
             return false
+            
         }
         
         guard pulseInt != nil else {
@@ -202,6 +145,12 @@ class LogViewController: UIViewController {
         let invalidDataAlert = UIAlertController(title: "invalid Data", message: "Please check your numbers and try again.", preferredStyle: .alert)
         invalidDataAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(invalidDataAlert, animated: true)
+    }
+    
+    func sqlError(_ title: String, _ message: String) {
+        let sqlAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        sqlAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(sqlAlert, animated: true)
     }
     
     
@@ -237,7 +186,79 @@ class LogViewController: UIViewController {
         return dateTimeStamp
             }
     
+    func openDatabase() -> OpaquePointer? {
+        var db: OpaquePointer? = nil
+        let title = "Open Error"
+        let message = "Error opening database"
+        if sqlite3_open(dataFilePath(), &db) == SQLITE_OK {
+            return db
+        }else {
+            sqlError(title, message)
+            sqlite3_close(db)
+            return nil
+        }
+    }
     
+    func createTable() {
+        //create a pointer
+        var createTableStatement: OpaquePointer? = nil
+        let title = "Table Create Error"
+        let success = "Table Created"
+        let message1 = "Log table could not be created"
+        let message2 = "CREATE TABLE statement could not be prepared."
+        let successMessage = "Contact table created."
+        // compile SQL statement into byte code and returns a status code, then checks to
+        // ensure the statement compiled successfully.
+        if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil) ==
+            SQLITE_OK {
+            //runs the compiled statement.
+            if sqlite3_step(createTableStatement) == SQLITE_DONE {
+                sqlError(success, successMessage)
+            } else {
+                sqlError(title, message1)
+            }
+            
+        } else {
+            sqlError(title, message2)
+        }
+        
+        sqlite3_finalize(createTableStatement)
+    }
     
-
+    func insert() {
+        var insertStatement: OpaquePointer? = nil
+        let message1 = "Could not insert row."
+        let message2 = "INSERT statement could not be prepared."
+        let successMessage = "Successfully inserted row."
+        let title = "Insert Error"
+        
+        
+        if sqlite3_prepare_v2(db, insertStatementString, -1, &insertStatement, nil) == SQLITE_OK {
+            
+            let id: Int32 = 1
+            let time: NSString = "Today"
+            let systolic: Int32 = 110
+            let diastolic: Int32 = 70
+            let bpm: Int32 = 80
+            let notes: NSString = "None"
+            
+            
+            sqlite3_bind_text(insertStatement, 2, time.utf8String, -1, nil)
+            sqlite3_bind_int(insertStatement, 3, systolic)
+            sqlite3_bind_int(insertStatement, 4, diastolic)
+            sqlite3_bind_int(insertStatement, 5, bpm)
+            sqlite3_bind_text(insertStatement, 6, notes.utf8String, -1, nil)
+            
+            if sqlite3_step(insertStatement) == SQLITE_DONE {
+                sqlError(title, successMessage)
+            } else {
+                sqlError(title, message1)
+                let errorMessage = String(validatingUTF8: sqlite3_errmsg(insertStatement))
+                print(errorMessage)
+            }
+        } else {
+            sqlError(title, message2)
+        }
+    }
+    
 }
