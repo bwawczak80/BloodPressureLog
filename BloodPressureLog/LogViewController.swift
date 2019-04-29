@@ -63,13 +63,14 @@ lazy var db = openDatabase()
     @IBAction func logBP(_ sender: Any) {
         let time = getTimeStamp()
         if validateData(systolic.text ?? "", diastolic.text ?? "", pulse.text ?? "") {
-        let systolicInput = Int(systolic.text!)
-        let diastolicInput = Int(diastolic.text!)
-        let pulseInput = Int(pulse.text!)
+        let systolicInput = Int32(systolic.text!)
+        let diastolicInput = Int32(diastolic.text!)
+        let pulseInput = Int32(pulse.text!)
         let notesInput = notes.text ?? "None"
-        let warningLabel = calculateBpWarning(systolicInput!, diastolicInput!)
+            let warningLabel = calculateBpWarning(Int(systolicInput!), Int(diastolicInput!))
+            logArray = [time, systolicInput ?? 0, diastolicInput ?? 0, pulseInput ?? 0, notesInput]
             
-        insert()
+            insert(logArray)
             
             
         display.isHidden = false
@@ -89,7 +90,7 @@ lazy var db = openDatabase()
                 display.backgroundColor = .orange
                 break;
             case 4:
-                display.text = "Your Blood Pressure indidcates State 3 Hypertension"
+                display.text = "Your Blood Pressure indidcates Stage 3 Hypertension"
                 display.backgroundColor = .orange
             case 5:
                 display.text = "Your Blood Pressure is Low"
@@ -225,7 +226,7 @@ lazy var db = openDatabase()
         sqlite3_finalize(createTableStatement)
     }
     
-    func insert() {
+    func insert(_ logArray: [Any]) {
         var insertStatement: OpaquePointer? = nil
         let message1 = "Could not insert row."
         let message2 = "INSERT statement could not be prepared."
@@ -235,26 +236,33 @@ lazy var db = openDatabase()
         
         if sqlite3_prepare_v2(db, insertStatementString, -1, &insertStatement, nil) == SQLITE_OK {
             
-            let id: Int32 = 1
-            let time: NSString = "Today"
-            let systolic: Int32 = 110
-            let diastolic: Int32 = 70
-            let bpm: Int32 = 80
-            let notes: NSString = "None"
+            let time: NSString = logArray[0] as! NSString
+            let systolic: Int32 = logArray[1] as! Int32
+            let diastolic: Int32 = logArray[2] as! Int32
+            let bpm: Int32 = logArray[3] as! Int32
+            let notes: NSString = logArray[4] as! NSString
             
+            // insert data in column 2 - 6.  Column 1 holds autoincremented primary key.
+            sqlite3_bind_text(insertStatement, 1, time.utf8String, -1, nil)
+            sqlite3_bind_int(insertStatement, 2, systolic)
+            sqlite3_bind_int(insertStatement, 3, diastolic)
+            sqlite3_bind_int(insertStatement, 4, bpm)
+            sqlite3_bind_text(insertStatement, 5, notes.utf8String, -1, nil)
             
-            sqlite3_bind_text(insertStatement, 2, time.utf8String, -1, nil)
-            sqlite3_bind_int(insertStatement, 3, systolic)
-            sqlite3_bind_int(insertStatement, 4, diastolic)
-            sqlite3_bind_int(insertStatement, 5, bpm)
-            sqlite3_bind_text(insertStatement, 6, notes.utf8String, -1, nil)
             
             if sqlite3_step(insertStatement) == SQLITE_DONE {
                 sqlError(title, successMessage)
+                print(time)
+                print(type(of: time))
+                print(systolic)
+                print(diastolic)
+                print(bpm)
+                print(notes)
+                print(type(of: notes))
             } else {
                 sqlError(title, message1)
-                let errorMessage = String(validatingUTF8: sqlite3_errmsg(insertStatement))
-                print(errorMessage)
+                //let errorMessage = String(validatingUTF8: sqlite3_errmsg(insertStatement))
+                //print(errorMessage)
             }
         } else {
             sqlError(title, message2)

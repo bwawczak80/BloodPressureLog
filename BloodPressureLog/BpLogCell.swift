@@ -22,10 +22,18 @@ class BpLogCell: UITableViewCell {
     @IBOutlet weak var notes: UILabel!
     
     func setUserLog(userBp: UserLog) {
-        date.text = userBp.date
-        pulse.text = userBp.pulse
-        systolic.text = userBp.systolic
-        diastolic.text = userBp.diastolic
+        
+        let bpmString = String(userBp.pulse)
+        let diastolicString = String(userBp.diastolic)
+        let systolicString = String(userBp.systolic)
+        date.text = userBp.time
+        
+        pulse.text = bpmString
+        
+        systolic.text = systolicString
+        
+        diastolic.text = diastolicString
+        
         notes.text = userBp.notes
     }
     
