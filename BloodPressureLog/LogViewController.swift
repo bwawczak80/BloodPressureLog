@@ -13,7 +13,7 @@ import WebKit
 import SQLite3
 
 class LogViewController: UIViewController {
-
+    
     @IBOutlet weak var systolic: UITextField!
     @IBOutlet weak var diastolic: UITextField!
     @IBOutlet weak var pulse: UITextField!
@@ -26,29 +26,13 @@ class LogViewController: UIViewController {
     
     var logArray:[Any] = []
     
-    let createTableString = """
-
-CREATE TABLE IF NOT EXISTS LogTable(
-Id INTEGER PRIMARY KEY AUTOINCREMENT,
-Time TEXT,
-Systolic INTEGER,
-Diastolic INTEGER,
-BPM INTEGER,
-Notes TEXT);
-"""
-    
-let insertStatementString = "INSERT INTO LogTable (Time, Systolic, Diastolic, BPM, Notes) VALUES (?, ?, ?, ?, ?);"
-
-lazy var db = openDatabase()
+    lazy var db = openDatabase()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         display.isHidden = true
         timeStamp.text = getTimeStamp()
-        
         createTable()
-        
     }
     
     func dataFilePath() -> String {
@@ -59,23 +43,26 @@ lazy var db = openDatabase()
         return url!
     }
     
-
+    
     @IBAction func logBP(_ sender: Any) {
         let time = getTimeStamp()
         if validateData(systolic.text ?? "", diastolic.text ?? "", pulse.text ?? "") {
-        let systolicInput = Int32(systolic.text!)
-        let diastolicInput = Int32(diastolic.text!)
-        let pulseInput = Int32(pulse.text!)
-        let notesInput = notes.text ?? "None"
+            let systolicInput = Int32(systolic.text!)
+            let diastolicInput = Int32(diastolic.text!)
+            let pulseInput = Int32(pulse.text!)
+            let notesInput = notes.text ?? "None"
             let warningLabel = calculateBpWarning(Int(systolicInput!), Int(diastolicInput!))
             logArray = [time, systolicInput ?? 0, diastolicInput ?? 0, pulseInput ?? 0, notesInput]
             
             insert(logArray)
             
+            systolic.text = ""
+            diastolic.text = ""
+            pulse.text = ""
+            notes.text = ""
             
-        display.isHidden = false
-        display.text = "Blood Pressure: \(systolicInput!) / \(diastolicInput!)\nPulse: \(pulseInput!)\n Notes: \(notesInput)"
-        timeStamp.text = time
+            display.isHidden = false
+            timeStamp.text = time
             switch(warningLabel){
             case 1:
                 display.text = "Your Blood Pressure is normal"
@@ -124,11 +111,9 @@ lazy var db = openDatabase()
             return false
             
         }
-        
         guard pulseInt != nil else {
             return false
         }
-        
         guard systolicInt != nil else {
             return false
         }
@@ -147,13 +132,6 @@ lazy var db = openDatabase()
         invalidDataAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(invalidDataAlert, animated: true)
     }
-    
-    func sqlError(_ title: String, _ message: String) {
-        let sqlAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        sqlAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(sqlAlert, animated: true)
-    }
-    
     
     func calculateBpWarning (_ sys: Int,_ dia: Int) -> Int {
         if sys < 120 && dia < 80 && sys >= 100 && dia >= 60 {
@@ -185,87 +163,66 @@ lazy var db = openDatabase()
         let timeNow = formatter.string(from: currentDate)
         let dateTimeStamp = "\(thisMonth)/\(day ?? 0)/\(year ?? 0) \(timeNow)"
         return dateTimeStamp
-            }
+    }
     
     func openDatabase() -> OpaquePointer? {
         var db: OpaquePointer? = nil
-        let title = "Open Error"
-        let message = "Error opening database"
         if sqlite3_open(dataFilePath(), &db) == SQLITE_OK {
             return db
         }else {
-            sqlError(title, message)
             sqlite3_close(db)
             return nil
         }
     }
     
     func createTable() {
-        //create a pointer
+        let createTableString = """
+
+CREATE TABLE IF NOT EXISTS LogTable(
+Id INTEGER PRIMARY KEY AUTOINCREMENT,
+Time TEXT,
+Systolic INTEGER,
+Diastolic INTEGER,
+BPM INTEGER,
+Notes TEXT);
+"""
         var createTableStatement: OpaquePointer? = nil
-        let title = "Table Create Error"
-        let success = "Table Created"
-        let message1 = "Log table could not be created"
-        let message2 = "CREATE TABLE statement could not be prepared."
-        let successMessage = "Contact table created."
-        // compile SQL statement into byte code and returns a status code, then checks to
-        // ensure the statement compiled successfully.
         if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil) ==
             SQLITE_OK {
-            //runs the compiled statement.
             if sqlite3_step(createTableStatement) == SQLITE_DONE {
-                sqlError(success, successMessage)
+                print("Contact table created")
             } else {
-                sqlError(title, message1)
+                print("Log table could not be created")
             }
-            
         } else {
-            sqlError(title, message2)
+            print("CREATE TABLE statement could not be prepared.")
         }
-        
         sqlite3_finalize(createTableStatement)
     }
     
     func insert(_ logArray: [Any]) {
+        let insertStatementString = "INSERT INTO LogTable (Time, Systolic, Diastolic, BPM, Notes) VALUES (?, ?, ?, ?, ?);"
         var insertStatement: OpaquePointer? = nil
-        let message1 = "Could not insert row."
-        let message2 = "INSERT statement could not be prepared."
-        let successMessage = "Successfully inserted row."
-        let title = "Insert Error"
-        
-        
         if sqlite3_prepare_v2(db, insertStatementString, -1, &insertStatement, nil) == SQLITE_OK {
-            
             let time: NSString = logArray[0] as! NSString
             let systolic: Int32 = logArray[1] as! Int32
             let diastolic: Int32 = logArray[2] as! Int32
             let bpm: Int32 = logArray[3] as! Int32
             let notes: NSString = logArray[4] as! NSString
             
-            // insert data in column 2 - 6.  Column 1 holds autoincremented primary key.
             sqlite3_bind_text(insertStatement, 1, time.utf8String, -1, nil)
             sqlite3_bind_int(insertStatement, 2, systolic)
             sqlite3_bind_int(insertStatement, 3, diastolic)
             sqlite3_bind_int(insertStatement, 4, bpm)
             sqlite3_bind_text(insertStatement, 5, notes.utf8String, -1, nil)
             
-            
             if sqlite3_step(insertStatement) == SQLITE_DONE {
-                sqlError(title, successMessage)
-                print(time)
-                print(type(of: time))
-                print(systolic)
-                print(diastolic)
-                print(bpm)
-                print(notes)
-                print(type(of: notes))
+                print("Successfully inserted row.")
             } else {
-                sqlError(title, message1)
-                //let errorMessage = String(validatingUTF8: sqlite3_errmsg(insertStatement))
-                //print(errorMessage)
+                print("Could not insert row.")
             }
         } else {
-            sqlError(title, message2)
+            print("INSERT statement could not be prepared.")
         }
     }
     
