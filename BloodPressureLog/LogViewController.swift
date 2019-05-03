@@ -33,6 +33,7 @@ class LogViewController: UIViewController {
         display.isHidden = true
         timeStamp.text = getTimeStamp()
         createTable()
+        
     }
     
     func dataFilePath() -> String {
@@ -52,7 +53,6 @@ class LogViewController: UIViewController {
             let pulseInput = Int32(pulse.text!)
             let notesInput = notes.text ?? "None"
             let warningLabel = calculateBpWarning(Int(systolicInput!), Int(diastolicInput!))
-            //var cellColorIndicator: Int32
             let cellColorIndicator = Int32(warningLabel)
         
             logArray = [time, systolicInput ?? 0, diastolicInput ?? 0, pulseInput ?? 0, notesInput, cellColorIndicator]
@@ -68,25 +68,24 @@ class LogViewController: UIViewController {
             case 1:
                 display.text = "Your Blood Pressure is normal"
                 display.backgroundColor = .green
-                //cellColorIndicator = Int32(1)
                 break;
             case 2:
                 display.text = "Your Blood Pressure is Elevated"
                 display.backgroundColor = .yellow
                 break;
             case 3:
-                display.text = "Your Blood Pressure indicates Stage 1 Hypertension"
+                display.text = "You have Stage 1 Hypertension"
                 display.backgroundColor = .orange
                 break;
             case 4:
-                display.text = "Your Blood Pressure indidcates Stage 3 Hypertension"
+                display.text = "You have Stage 3 Hypertension"
                 display.backgroundColor = .orange
             case 5:
                 display.text = "Your Blood Pressure is Low"
                 display.backgroundColor = .yellow
                 break;
             case 6:
-                display.text = "Your Blood Pressure indicates a Hypertensive Crisis.  Please seek medical assistance!"
+                display.text = "You are in Hypertensive Crisis."
                 display.backgroundColor = .red
             default:
                 display.text = "Please enter a valid number"
@@ -236,12 +235,6 @@ Indicator INTEGER
         } else {
             print("INSERT statement could not be prepared.")
         }
+        sqlite3_finalize(insertStatement)
     }
-    
-    func sqlError(_ title: String, _ message: String) {
-        let sqlAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        sqlAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(sqlAlert, animated: true)
-    }
-    
 }

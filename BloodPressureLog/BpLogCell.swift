@@ -23,8 +23,9 @@ class BpLogCell: UITableViewCell {
     
     @IBOutlet weak var contentColor: UIView!
     
+    
+    
     func setUserLog(userBp: UserLog) {
-        
         let bpmString = String(userBp.pulse)
         let diastolicString = String(userBp.diastolic)
         let systolicString = String(userBp.systolic)

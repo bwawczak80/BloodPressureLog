@@ -19,8 +19,6 @@ class UserLog {
     var notes: String
     var indicator: Int32
     
-    
-    
     init(time: String, systolic: Int32, diastolic: Int32, pulse: Int32, notes: String, indicator: Int32) {
         self.time = time
         self.systolic = systolic

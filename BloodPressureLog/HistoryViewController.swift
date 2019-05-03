@@ -17,17 +17,12 @@ class HistoryViewController: UIViewController {
     var dataArray: [UserLog] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       
         dataArray = query()
         tableView.delegate = self
         tableView.dataSource = self
-        
     }
-    override func viewWillAppear(_ animated: Bool) {
-       tableView.reloadData()
-    }
-    
+
+
     func openDatabase() -> OpaquePointer? {
         var db: OpaquePointer? = nil
         let title = "Open Error"
@@ -75,11 +70,13 @@ class HistoryViewController: UIViewController {
                 dataArray.append(log)
                 
             }
+            sqlite3_finalize(queryStatement)
             return dataArray
         }else {
             sqlError("Query Error", "Failed to retrieve data")
             return []
         }
+        
         
     }
 }
