@@ -24,7 +24,6 @@ class WebViewControl: UIViewController {
     
     
     @IBAction func btnBack(_ sender: Any) {
-        //self.performSegue(withIdentifier: "returnFromWebView", sender: self)
         
     }
     

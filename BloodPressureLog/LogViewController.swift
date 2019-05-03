@@ -52,9 +52,10 @@ class LogViewController: UIViewController {
             let pulseInput = Int32(pulse.text!)
             let notesInput = notes.text ?? "None"
             let warningLabel = calculateBpWarning(Int(systolicInput!), Int(diastolicInput!))
-            logArray = [time, systolicInput ?? 0, diastolicInput ?? 0, pulseInput ?? 0, notesInput]
-            
-            insert(logArray)
+            //var cellColorIndicator: Int32
+            let cellColorIndicator = Int32(warningLabel)
+        
+            logArray = [time, systolicInput ?? 0, diastolicInput ?? 0, pulseInput ?? 0, notesInput, cellColorIndicator]
             
             systolic.text = ""
             diastolic.text = ""
@@ -67,6 +68,7 @@ class LogViewController: UIViewController {
             case 1:
                 display.text = "Your Blood Pressure is normal"
                 display.backgroundColor = .green
+                //cellColorIndicator = Int32(1)
                 break;
             case 2:
                 display.text = "Your Blood Pressure is Elevated"
@@ -90,6 +92,7 @@ class LogViewController: UIViewController {
                 display.text = "Please enter a valid number"
                 
             }
+            insert(logArray)
         }
         else{
             errorMessage()
@@ -184,14 +187,19 @@ Time TEXT,
 Systolic INTEGER,
 Diastolic INTEGER,
 BPM INTEGER,
-Notes TEXT);
+Notes TEXT,
+Indicator INTEGER
+);
 """
         var createTableStatement: OpaquePointer? = nil
+        
         if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil) ==
             SQLITE_OK {
             if sqlite3_step(createTableStatement) == SQLITE_DONE {
                 print("Contact table created")
+                
             } else {
+                
                 print("Log table could not be created")
             }
         } else {
@@ -201,7 +209,7 @@ Notes TEXT);
     }
     
     func insert(_ logArray: [Any]) {
-        let insertStatementString = "INSERT INTO LogTable (Time, Systolic, Diastolic, BPM, Notes) VALUES (?, ?, ?, ?, ?);"
+        let insertStatementString = "INSERT INTO LogTable (Time, Systolic, Diastolic, BPM, Notes, Indicator) VALUES (?, ?, ?, ?, ?, ?);"
         var insertStatement: OpaquePointer? = nil
         if sqlite3_prepare_v2(db, insertStatementString, -1, &insertStatement, nil) == SQLITE_OK {
             let time: NSString = logArray[0] as! NSString
@@ -209,12 +217,16 @@ Notes TEXT);
             let diastolic: Int32 = logArray[2] as! Int32
             let bpm: Int32 = logArray[3] as! Int32
             let notes: NSString = logArray[4] as! NSString
+            let indicator: Int32 = logArray[5] as! Int32
+            
             
             sqlite3_bind_text(insertStatement, 1, time.utf8String, -1, nil)
             sqlite3_bind_int(insertStatement, 2, systolic)
             sqlite3_bind_int(insertStatement, 3, diastolic)
             sqlite3_bind_int(insertStatement, 4, bpm)
             sqlite3_bind_text(insertStatement, 5, notes.utf8String, -1, nil)
+            sqlite3_bind_int(insertStatement, 6, indicator)
+            
             
             if sqlite3_step(insertStatement) == SQLITE_DONE {
                 print("Successfully inserted row.")
@@ -224,6 +236,12 @@ Notes TEXT);
         } else {
             print("INSERT statement could not be prepared.")
         }
+    }
+    
+    func sqlError(_ title: String, _ message: String) {
+        let sqlAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        sqlAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(sqlAlert, animated: true)
     }
     
 }
